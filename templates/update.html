@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/signup.css" />
+
+    <title>Atualizar Conta</title>
+  </head>
+  <body>
+    <form action="/Atualiar" method="post">
+      {%for dados in dados%}
+      <div class="logo">
+        <h1>SERBTEC</h1>
+      </div>
+      <div class="create">
+        <h2>atualizar Conta</h2>
+      </div>
+
+      <div class="input">
+        <span>Nome</span>
+        <input type="text" name="nome" value="{{dados.1}}" />
+      </div>
+
+      <div class="input">
+        <span>Email</span>
+        <input type="text" name="email" value="{{dados.2}}" />
+      </div>
+
+
+      <div class="input">
+        <span>Senha</span>
+        <input type="text" name="senha" value="{{dados.3}}" />
+      </div>
+
+      <div class="btn">
+        <button>Autenticar</button>
+      </div>
+
+      <div class="possui">
+        <p><a href="{{ url_for('Tabela') }}">Cancelar</a></p>
+      </div>
+        <input type="hidden" name="id" value="{{dados.0}}">
+      <div class="copy">
+        <p>&copy; CopyScricpt SERBTEC 2023</p>
+      </div>
+      {%endfor%}
+    </form>
+  </body>
+</html>

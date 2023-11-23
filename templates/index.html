@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--    <link rel="stylesheet" href="./css/login.css" />-->
+     <link rel="stylesheet" href="../static/login.css">
+    <title>Login</title>
+  </head>
+  <body>
+    <form action="#" method="post">
+      <div class="logo">
+        <h1>SERBTEC</h1>
+      </div>
+
+      <div class="input">
+        <span>Nome</span>
+        <input type="text" placeholder="Nome do Usuario" />
+      </div>
+
+      <div class="input">
+        <span>Senha</span>
+        <input type="text" placeholder="Senha do Usuario" />
+      </div>
+
+      <div class="btn">
+        <button>Autenticar</button>
+      </div>
+
+      <div class="possui">
+        <p>Nao possui uma conta? <a href="{{ url_for('Signup') }}">Criar Conta</a></p>
+      </div>
+
+      <div class="copy">
+        <p>&copy; CopyScricpt SERBTEC 2023</p>
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela</title>
+  <link rel="stylesheet" href="../static/tabela.css" />
+</head>
+<body>
+<table style="width:100%, border: 1px solid black, border-collapse: collapse">
+  <tr>
+  <th>ID</th>
+    <th>NOME</th>
+    <th>EMAIL</th>
+    <th>SENHA</th>
+    <th>EDITAR</th>
+    <th>EXCLUIR</th>
+
+  </tr>
+  {% for resultados in dados %}
+
+  <tr>
+  <td>{{resultados.0}}</td>
+    <td>{{resultados.1}}</td>
+    <td>{{resultados.2}}</td>
+    <td>{{resultados.3}}</td>
+    <td><a href="/update/{{resultados.0}}">EDITAR</a></td>
+    <td><a href="/delete/{{resultados.0}}">EXCLUIR</a></td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
