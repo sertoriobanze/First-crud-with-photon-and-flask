@@ -1,0 +1,18 @@
+-- Tabela de Despesas
+CREATE TABLE despesas (
+    idDispesa INT PRIMARY KEY AUTO_INCREMENT,
+    categoria VARCHAR(255) NOT NULL,
+    idUser INT NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL
+);
+
+-- Tabela de Receitas
+CREATE TABLE receitas (
+    idReceita INT PRIMARY KEY AUTO_INCREMENT,
+    categoria VARCHAR(255) NOT NULL,
+    idUser INT NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL
+);
+
+
+-------------------------------

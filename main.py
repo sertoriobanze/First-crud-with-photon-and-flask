@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 import mysql.connector
 
 
@@ -66,9 +66,9 @@ def Signup():
 def Cadastrar():
     if request.method == 'POST':
         # Se o método da requisição for POST, você pode acessar os dados do formulário
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
+        nome = request.form['NewUserName']
+        email = request.form['newEmail']
+        senha = request.form['NewPass']
 
         query =f"insert into Users(nome,email,senha) values ('{nome}','{email}','{senha}')"
         cursor.execute(query)
