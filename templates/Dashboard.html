@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../static/dasboard.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  
   <title>DASHBOARD</title>
 </head>
 <body>
@@ -31,13 +35,13 @@
           </a>
         </li>
         <li>
-          <a href="#" id="addReceita">
+          <a href="javascript:void(1);" id="addReceita">
             <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
             <span class="title">adcionar receita</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/logout" >
             <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
             <span class="title">Sair</span>
           </a>
@@ -55,8 +59,10 @@
         <div class="userInfo">
           <span class="img"><ion-icon name="person-circle-outline"></ion-icon></span>
           <div class="userCont">
-            <span class="name">sertorio banze</span>
-            <span class="email">banzetuma@gmail.com</span>
+
+            <span class="name">{{user.0}}</span>
+            <span class="email">{{user.1}}</span>
+
           </div>
           
         </div>
@@ -70,8 +76,9 @@
           </div>
           <div class="body">
             <div class="dispesas">
-              <p>22220</p>
-              <span>MZN</span>
+              <p id="total_receitas">{{ total_receitas }}</p>
+            <span>MZN</span>
+              
              
             </div>
           </div>
@@ -84,9 +91,9 @@
           </div>
           <div class="body">
             <div class="dispesas">
-              <p>0</p>
+              
+              <p id="total_despesas">{{ total_despesas }}</p>
               <span>MZN</span>
-             
             </div>
           </div>
           
@@ -98,7 +105,7 @@
           </div>
           <div class="body">
             <div class="dispesas">
-              <p>0</p>
+              <p id="saldo">{{saldo}}</p>
               <span>MZN</span>
               
             </div>
@@ -122,15 +129,31 @@
       </div>
 
       <div class="chartContainer">
-        <div class="chartCont"></div>
-        <div class="leftChart"></div>
+        <div class="chartCont">
+          <div class="chart">
+            <div class="body">
+              <canvas id="myChart" style="max-width: 100%; max-height: 100%;"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="../static/js/chart.js"></script>
+          </div>
+        </div>
+        <div class="leftChart">
+          <div class="doughnut-chart">
+          
+            <div class="body">
+                <canvas id="doughnutChart" style="max-width: 100%; max-height: 100%;"></canvas>
+            </div>
+        </div>
+    </div>
+        </div>
       </div>
 
     </div>
 
     <div class="popup" id="popup">
       
-      <form action="#" method="post">
+      <form action="/adcionarDispesa" method="post">
         <div class="close" id="closePop"><ion-icon name="close-outline"></ion-icon></div>
 
         <div class="containerPop">
@@ -138,14 +161,14 @@
             <h1>NOVA DISPESA</h1>
           </div>
           <div class="input">
-            <label for="name">Nome</label>
-            <input type="text" name="nomeDispesa" placeholder="Nome da Dispesa" id="inputNome">
+            <label>Nome</label>
+            <input type="text" name="nomeDispesa" placeholder="Nome da Dispesa" id="inputNome2">
 
           </div>
           
           <div class="input">
-            <label for="name">Categoria</label>
-            <select name="categoriaDispesa" id="categoriasDespesas">
+            <label>Categoria</label>
+            <select name="categoriaDispesa" id="categoriasDespesas2">
 
               <option value="Default">Escolha a categoria</option>
               <option value="alimentacao">Alimentação</option>
@@ -159,8 +182,8 @@
           </div>
 
           <div class="input">
-            <label for="name">Valor</label>
-            <input type="text" name="ValorDispesa" placeholder="Valor da Dispesa" id="inputValor">
+            <label>Valor</label>
+            <input type="text" name="ValorDispesa" placeholder="Valor da Dispesa" id="inputValor2">
 
           </div>
 
@@ -168,6 +191,57 @@
             <button type="submit">Adcionar</button>
            
               <div class="btn" id="closePop2">Cancelar<ion-icon name="close-outline"></ion-icon></div>
+            </div>
+         
+
+        </div>
+        
+        
+
+      </form>
+
+    </div>
+
+    <div class="popup" id="popup2">
+      
+      <form action="/adcionarReceita" method="post">
+        <div class="close" id="closePop4"><ion-icon name="close-outline"></ion-icon></div>
+
+        <div class="containerPop">
+          <div class="tittlePop">
+            <h1>NOVA RECEITA</h1>
+          </div>
+          <div class="input">
+            <label>Nome</label>
+            <input type="text" name="NomeReceita"  placeholder="Nome da Receita" id="inputNome">
+
+          </div>
+          
+          <div class="input">
+            <label>Categoria</label>
+            <select id="categoriasDespesas" name="categoriaReceita" >
+
+              <option value="Default">Escolha a categoria</option>
+              <option value="salarios">Salários</option>
+              <option value="freelance">Trabalho Freelance</option>
+              <option value="investimentos">Investimentos</option>
+              <option value="alugueis">Aluguéis</option>
+              <option value="vendas">Vendas</option>
+              <option value="outros">Outros</option>
+            </select>
+
+          </div>
+
+          <div class="input">
+            <label>Valor</label>
+            <input type="text" name="ValorReceita"  placeholder="Valor da Receita" id="inputValor">
+
+          </div>
+
+          <div class="buttons">
+            <button type="submit">Adcionar</button>
+           
+              <div class="btn" id="closePop3">Cancelar<ion-icon name="close-outline"></ion-icon></div>
             </div>
          
 
