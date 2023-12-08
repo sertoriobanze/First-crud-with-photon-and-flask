@@ -9,3 +9,18 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
+
+
+//....................
+document.addEventListener('DOMContentLoaded', function () {
+    var flashMessages = document.getElementById('flash-messages');
+    if (flashMessages) {
+        flashMessages.addEventListener('animationend', function () {
+            flashMessages.style.display = 'none';
+        });
+
+        setTimeout(function () {
+            flashMessages.classList.add('hide');
+        }, 5000);
+    }
+});

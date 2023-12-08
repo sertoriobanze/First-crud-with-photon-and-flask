@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash,session,jsonify
+from flask import Flask, render_template, request, redirect, flash,session,jsonify,url_for
 import mysql.connector
 
 
@@ -40,13 +40,21 @@ def Cadastrar():
 
    # Verifica se o cadastro foi bem-sucedido antes de redirecionar
         if cursor.rowcount > 0:
-            return redirect("/tabela")
+            flash('Cadastrado com sucesso', 'success')
+            return redirect("/")
         else:
-            return "Erro ao cadastrar usuário"
+            flash('Erro ao cadastrar', 'error')
+            return redirect("/")
+    return redirect("/")  # Redireciona de volta para a página de cadastro se não for um POST
 
-    return redirect("/signup")  # Redireciona de volta para a página de cadastro se não for um POST
 
-
+def BuscarReceitasEDespesas():
+    id = session['user_id']
+    cursor.execute(f'select idReceita,nome,categoria,valor,data from Receitas where idUser = {id}')
+    receitas = cursor.fetchall()
+    cursor.execute(f'select * from Despesas where idUser = {id}')
+    despesas = cursor.fetchall()
+    return receitas, despesas
 
 
 @app.route("/update/<int:id>")
@@ -87,7 +95,12 @@ def dashboard():
     if 'user_id' in session:
         user_id = session['user_id']
 
+
+        #chamar as receitas e despesas para mostrar nas tabelas
+        receitas,despeas = BuscarReceitasEDespesas()
+
         # Agora você tem o user_id disponível no dashboard
+
         # Pode usar para buscar os dados do usuário no banco de dados
 
         cursor.execute(f"SELECT nome,email FROM Users WHERE id = {user_id}")
@@ -97,7 +110,7 @@ def dashboard():
 
         saldo = total_receitas - total_despesas
 
-        return render_template("Dashboard.html", user_id=user_id, user=user, total_despesas=total_despesas, total_receitas=total_receitas, saldo=saldo, jsonify=jsonify)
+        return render_template("Dashboard.html", user_id=user_id, user=user, total_despesas=total_despesas, total_receitas=total_receitas, saldo=saldo, jsonify=jsonify, receitas=receitas, despeas=despeas)
     else:
         # Se o usuário não estiver autenticado, redireciona para a página de login
         return redirect("/")
@@ -117,7 +130,8 @@ def autenticar_user():
             session['user_id'] = user[0]
             return redirect("/dashboard")
         else:
-            print("Algo deu errado")
+            flash('Nome de usuário ou senha inválidos', 'error')
+            return redirect("/")
 
     return "Método não permitido", 405
 
@@ -138,8 +152,8 @@ def adcionarDispesa():
         query =f"insert into Despesas(nome,valor,categoria,data, idUser) values ('{nome}','{valor}','{categoria}',NOW(),'{user_id}')"
         cursor.execute(query)
         connexao.commit()
-        print("deu certo")
-        return jsonify({"message": "Dispesa adicionada com sucesso!"})  # Adicione este retorno
+        flash('Dispesa adicionada com sucesso!', 'success')
+        return redirect(url_for('dashboard', message_type='success'))
 
     return jsonify({"message": "Requisição inválida"})
 
@@ -155,11 +169,25 @@ def adcionarReceita():
         query =f"insert into Receitas(nome,valor,categoria,data, idUser) values ('{nome}','{valor}','{categoria}',NOW(),'{user_id}')"
         cursor.execute(query)
         connexao.commit()
-        print("deu certo")
-        return jsonify({"message": "Receita adicionada com sucesso!"})  # Adicione este retorno
+        flash('Receita adicionada com sucesso!', 'success')
+        return redirect(url_for('dashboard', message_type='success'))
 
     return jsonify({"message": "Requisição inválida"})
 
+@app.route('/deleteDespesa/<int:id>')
+def deleteDespesa(id):
+    cursor.execute(f"delete from Despesas where idDispesa = {id}")
+    connexao.commit()
+    flash('Despesa excluída com sucesso!', 'success')
+    return redirect("/dashboard")
+
+
+@app.route('/deleteReceita/<int:id>')
+def deleteReceita(id):
+    cursor.execute(f"delete from Receitas where idReceita = {id}")
+    connexao.commit()
+    flash('Receita excluída com sucesso!', 'success')
+    return redirect("/dashboard")
 
 
 def obter_totais(user_id):

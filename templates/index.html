@@ -15,7 +15,18 @@
       <div class="forms-container">
         <div class="signin-signup">
           <form action="/autenticarUser" method="post" class="sign-in-form">
-            <h2 class="title">Sign in</h2>
+            <h2 class="title">Login</h2>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div id="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" name="Username" placeholder="Username" />
@@ -25,7 +36,7 @@
               <input type="password" name="userPass" placeholder="Password" />
             </div>
             <input type="submit" value="Login" class="btn solid" />
-            <p class="social-text">Or Sign in with social platforms</p>
+            <p class="social-text">Ou faça login com plataformas sociais</p>
             <div class="social-media">
               <a href="#" class="social-icon">
                 <i class="fab fa-facebook-f"></i>
@@ -42,7 +53,7 @@
             </div>
           </form>
           <form action="/cadastrar" method="POST" class="sign-up-form">
-            <h2 class="title">Sign up</h2>
+            <h2 class="title">Criar Conta</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" placeholder="Username" name="NewUserName" />
@@ -56,7 +67,7 @@
               <input type="password" placeholder="Password" name="NewPass"/>
             </div>
             <input type="submit" class="btn" value="Sign up" />
-            <p class="social-text">Or Sign up with social platforms</p>
+            <p class="social-text">Ou inscreva-se com plataformas sociais</p>
             <div class="social-media">
               <a href="#" class="social-icon">
                 <i class="fab fa-facebook-f"></i>
@@ -78,10 +89,9 @@
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <h3>New here ?</h3>
+            <h3>Novo aqui ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              Crie uma conta no sistema de gestao de fincancas pessoais, e visualize as suas financas de forma facil
             </p>
             <button class="btn transparent" id="sign-up-btn">
               Sign up
@@ -91,10 +101,9 @@
         </div>
         <div class="panel right-panel">
           <div class="content">
-            <h3>One of us ?</h3>
+            <h3>Ja possui uma conta ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Faca o login e disfrute do nosso sistema
             </p>
             <button class="btn transparent" id="sign-in-btn">
               Sign in

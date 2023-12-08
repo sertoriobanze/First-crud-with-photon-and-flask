@@ -30,7 +30,8 @@ body{
     
 }
 .navegation{
-    width: 300px;
+    position: fixed;
+    width: 270px;
     
     height: 100vh;
     background-color: var(--blue);
@@ -95,6 +96,7 @@ box-shadow: #22222295 0px 0px 5px 0px;
 
 .main{
     width: 100%;
+    margin-left: 270px;
     /* padding: 0px 10px; */
 }
 .main .topper{
@@ -156,7 +158,7 @@ align-items: center;
     justify-content: center;
 }
 .cards .card{
-    height: 120px;
+    /* height: 120px; */
     width: 100%;
     background-color: var(--white);
     border-radius: var(--radius);
@@ -360,11 +362,11 @@ form .btn:hover, button:hover{
 }
 
 .navegation.expanded {
-    width: 75px;
+    width: 71px;
 }
 
 .navegation {
-    width: 300px;
+    width: 270px;
     transition: width 0.3s;
     /* Adicione outras propriedades de transição, se necessário */
 }
@@ -382,3 +384,165 @@ form .btn:hover, button:hover{
 .chart .body{
     height: 95%;
 }
+
+/* Adicione este estilo no seu arquivo de estilo CSS */
+/* Adicione este estilo no seu arquivo de estilo CSS */
+#flash-messages {
+    position: fixed;
+    top: 40px;
+    right: 20px;
+    max-width: 300px;
+    z-index: 1000;
+}
+
+.flash-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #28a745;
+}
+
+.flash-message.success {
+      /* Cor verde para mensagens de sucesso */
+}
+
+.hide {
+    animation: hideMessage 1s forwards;
+}
+
+@keyframes hideMessage {
+    to {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.tableConainer {
+    width: 100%;
+    /* background-color: #fff; */
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 10px;
+    justify-content: center;
+    font-family: sans-serif;
+  }
+  .table{
+    padding: 10px;
+    /* width: 100%; */
+  }
+
+
+
+/* .......... */
+
+.table table{
+    width: 100%;
+    border-collapse: collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color: white;
+  text-align: left;
+  overflow: hidden;
+  font-family: sans-serif;
+  border-radius: var(--radius);
+
+}
+
+thead {
+    box-shadow: 0 5px 10px #e1e5ee;
+  }
+
+  th {
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    /* font-size: 0.7rem; */
+    font-weight: 900;
+  }
+
+  td {
+    padding: 0.5rem 1rem;
+    /* font-size: 0.7rem; */
+  }
+
+  tr:nth-child(even) {
+    background-color: #f4f6fb;
+  }
+
+
+  @media (max-width: 1029px){
+    .cards{
+        width: 100%;
+        /* background-color: #444; */
+        min-height: 100px;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+
+    .chartContainer .chartCont{
+        height: 250px;
+    }
+   .chartContainer .leftChart{
+        height: 250px;
+    }
+    
+  }
+
+  @media (max-width: 923px){
+    .cards{
+        width: 100%;
+        /* background-color: #444; */
+        min-height: 100px;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+
+    .chartContainer .chartCont{
+        height: 250px;
+    }
+   .chartContainer .leftChart{
+        height: 250px;
+    }
+
+
+
+    
+  }
+
+  @media (max-width: 753px){
+    .cards{
+        width: 100%;
+        /* background-color: #444; */
+        min-height: 100px;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+
+    .chartContainer .chartCont{
+        height: 200px;
+    }
+   .chartContainer .leftChart{
+        height: 200px;
+    }
+    .chartContainer{
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 20px;
+        justify-content: center; 
+    }
+
+
+
+
+    
+  }

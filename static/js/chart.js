@@ -43,11 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Configurações do gráfico de rosquinha
     const doughnutData = {
-        labels: ['Receitas', 'Dispesas', 'Saldo Restante'],
+        labels: ['Dispesas', 'Saldo Restante'],
         datasets: [{
-            data: [totalReceitas, totalDespesas, saldo],
+            data: [totalDespesas, saldo],
             backgroundColor: [
-                'rgba(75, 192, 192, 0.7)',
+
                 'rgba(255, 99, 132, 0.7)',
                 'rgba(54, 162, 235, 0.7)',
             ],

@@ -25,15 +25,20 @@ document.getElementById("closePop2").addEventListener("click", function() {
 
 document.getElementById("menuIcon").addEventListener("click", function() {
     var navigation = document.querySelector(".navegation");
+    var main = document.getElementById('main')
     var isExpanded = navigation.classList.contains("expanded");
 
     if (isExpanded) {
         // Se a navegação estiver expandida, recolha
         navigation.classList.remove("expanded");
+        main.style.transition ="0.3s"
+        main.style.marginLeft = "270px"
         console.log("Navegação recolhida");
     } else {
         // Se a navegação estiver recolhida, expanda
         navigation.classList.add("expanded");
+        main.style.transition = "0.3s"
+        main.style.marginLeft = "75px"
     }
 });
 
@@ -67,4 +72,18 @@ document.getElementById("closePop3").addEventListener("click", function() {
 
     // Define o <select> de volta para a opção padrão
     document.getElementById("categoriasDespesas").selectedIndex = 0; // Substitua "categoriasDespesas" pelo ID real do seu select
+});
+
+// ................
+document.addEventListener('DOMContentLoaded', function () {
+    var flashMessages = document.getElementById('flash-messages');
+    if (flashMessages) {
+        flashMessages.addEventListener('animationend', function () {
+            flashMessages.style.display = 'none';
+        });
+
+        setTimeout(function () {
+            flashMessages.classList.add('hide');
+        }, 5000);
+    }
 });

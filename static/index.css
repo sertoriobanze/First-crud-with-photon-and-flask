@@ -398,3 +398,39 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+/* Adicione este estilo no seu arquivo de estilo CSS */
+#flash-messages {
+  /* position: fixed;
+    top: 40px;
+    right: 20px; */
+  max-width: 100%;
+  z-index: 1000;
+  font-size: 1em;
+}
+
+.flash-message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #db5a5a;
+}
+
+.flash-message.success {
+  /* Cor verde para mensagens de sucesso */
+}
+
+.hide {
+  animation: hideMessage 1s forwards;
+}
+
+@keyframes hideMessage {
+  to {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
